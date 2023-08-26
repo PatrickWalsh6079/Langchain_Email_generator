@@ -52,18 +52,19 @@ st.header("Generate Emails 📧")
 form_input = st.text_area('Enter the email topic', height=275)
 
 # Creating columns for the UI - To receive inputs from user
-col1, col2, col3 = st.columns([10, 10, 5])
+col1, col2, col3 = st.columns([10, 10, 10])
 with col1:
     email_sender = st.text_input('Sender Name')
 with col2:
     email_recipient = st.text_input('Recipient Name')
 with col3:
     email_style = st.selectbox('Writing Style',
-                               ('Formal', 'Appreciating', 'Not Satisfied', 'Neutral'),
+                               ('Formal', 'Appreciative', 'Not Satisfied', 'Neutral'),
                                index=0)
 
 submit = st.button("Generate")
 
 # When 'Generate' button is clicked, execute the below code
 if submit:
-    st.write(getLLMResponse(form_input, email_sender, email_recipient, email_style))
+    with st.spinner("Generating email..."):
+        st.write(getLLMResponse(form_input, email_sender, email_recipient, email_style))
